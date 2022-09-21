@@ -4,3 +4,6 @@
 # IDE - VSCode
 .vscode/*
 .history/*
+
+# persona
+/trash

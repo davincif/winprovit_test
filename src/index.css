@@ -1,0 +1,14 @@
+body {
+  min-height: 100vh;
+  /* border: 2px solid red; */
+}
+
+body .container {
+  margin: 3rem;
+  width: 100%;
+  height: 100%;
+}
+
+body .container .btn {
+  padding: 1rem;
+}

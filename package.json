@@ -1,0 +1,11 @@
+{
+  "name": "davincif_winprovit",
+  "version": "1.0.0",
+  "description": "a tiny project for a job attempt =)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "davincif",
+  "license": "MIT"
+}

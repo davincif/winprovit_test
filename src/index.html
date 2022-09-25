@@ -11,33 +11,42 @@
 
   <body>
     <div class="container">
-      <button id="showMe" class="btn">Show me!</button>
-      <button id="clearIt" class="btn">Clean it!</button>
+      <button id="showMe" class="btn btn-left">Show me!</button>
+      <button id="clearIt" class="btn btn-right">Clean it!</button>
 
       <!-- <div id="usersContainer" hidden> -->
-      <div id="usersContainer">
+      <div id="usersContainer" class="users">
         <details id="contentSection">
-          <summary>Users</summary>
+          <summary>Usuários</summary>
           <table>
             <tr>
-              <th>Company</th>
-              <th>Contact</th>
-              <th>Country</th>
+              <th>id</th>
+              <th>Nome</th>
+              <th>User</th>
+              <th>Email</th>
+              <th>Endereço</th>
+              <th>CEP</th>
+              <th>Localização</th>
+              <th>Telefone</th>
+              <th>website</th>
+              <th>Empresa</th>
             </tr>
             <tr>
-              <td>Alfreds Futterkiste</td>
-              <td>Maria Anders</td>
-              <td>Germany</td>
-            </tr>
-            <tr>
-              <td>Centro comercial Moctezuma</td>
-              <td>Francisco Chang</td>
-              <td>Mexico</td>
+              <td>-</td>
+              <td>Vazio</td>
+              <td>Vazio</td>
+              <td>Vazio</td>
+              <td>Vazio</td>
+              <td>-</td>
+              <td>(-,-)</td>
+              <td>Vazio</td>
+              <td>Vazio</td>
+              <td>Vazio</td>
             </tr>
           </table>
         </details>
 
-        <div id="errorSection" class="errormsg">
+        <div id="errorSection" class="error-msg">
           <p></p>
         </div>
       </div>

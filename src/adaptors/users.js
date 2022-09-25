@@ -15,8 +15,7 @@ export class AdaptorUser {
     ).then((resp) => {
       // error cases should be treated by the caller
       if (
-        resp.status != 200 ||
-        resp.status != 201 ||
+        (resp.status != 200 && resp.status != 201) ||
         !resp.body ||
         !Array.isArray(resp.body)
       ) {

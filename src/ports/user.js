@@ -18,8 +18,7 @@ export class PortUser {
     const resp = await this.adaptor.getAllUsers();
 
     if (
-      resp.status != 200 ||
-      resp.status != 201 ||
+      (resp.status != 200 && resp.status != 201) ||
       !resp.body ||
       !Array.isArray(resp.body)
     ) {
@@ -33,7 +32,9 @@ export class PortUser {
           inUser.name,
           inUser.username,
           inUser.email,
-          inUser.address,
+          `${inUser.address.street}, ${inUser.address.suite} at ${inUser.address.city}`,
+          inUser.address.zipcode,
+          inUser.address.geo,
           inUser.phone,
           inUser.website,
           inUser.company,

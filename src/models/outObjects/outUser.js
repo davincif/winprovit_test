@@ -7,9 +7,18 @@ export class OutUser {
   username = "";
   email = "";
   address = "";
+  zipcode = "";
+  geo = {
+    lat: "",
+    lng: "",
+  };
   phone = "";
   website = "";
-  company = "";
+  company = {
+    name: "",
+    catchPhrase: "",
+    bs: "",
+  };
   posts = [];
 
   constructor(
@@ -18,6 +27,8 @@ export class OutUser {
     username,
     email,
     address,
+    zipcode,
+    geo,
     phone,
     website,
     company,
@@ -28,6 +39,8 @@ export class OutUser {
     this.username = username || this.username;
     this.email = email || this.email;
     this.address = address || this.address;
+    this.zipcode = zipcode || this.zipcode;
+    this.geo = geo || this.geo;
     this.phone = phone || this.phone;
     this.website = website || this.website;
     this.company = company || this.company;

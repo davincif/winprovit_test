@@ -11,9 +11,26 @@ body .container {
 
 body .container .btn {
   padding: 1rem;
-  margin: 0 0.25rem;
 }
 
-body .container .errormsg {
-  color: rgb(180, 0, 0)
+body .container .btn-left {
+  margin-right: 0.25rem;
+}
+
+body .container .btn-right {
+  margin-left: 0.25rem;
+}
+
+body .container .users {
+  margin-top: 2rem;
+}
+
+body .container .users table,
+th,
+td {
+  border: 1px solid black;
+}
+
+body .container .error-msg {
+  color: rgb(180, 0, 0);
 }

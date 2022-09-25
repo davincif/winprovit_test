@@ -1,4 +1,4 @@
-import { PortUser } from "../ports/user.js";
+import { PortUser } from "../ports/users.js";
 
 export class CoreUser {
   userPort;

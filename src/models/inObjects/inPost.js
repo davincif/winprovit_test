@@ -1,7 +1,7 @@
 /**
  * A post made by the user ready to be delivered to the view
  */
-export class OutPost {
+export class InPost {
   id = 0;
   userId = 0;
   title = "";

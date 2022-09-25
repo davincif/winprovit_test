@@ -1,4 +1,4 @@
-import { InPost } from "../models/inObjects/inPosts.js";
+import { InPost } from "../models/inObjects/inPost.js";
 import { InUser } from "../models/inObjects/inUser.js";
 import { ErrorTransferObj } from "../models/transferObjects/errorTransferObj.js";
 import {
@@ -8,7 +8,7 @@ import {
 import { HttpTransferObj } from "../models/transferObjects/httpTransferObj.js";
 import { ErrorHandler } from "./errorHandler.js";
 
-export class AdaptorUser {
+export class PortUser {
   errorHandler = new ErrorHandler();
 
   constructor() {}
@@ -28,16 +28,18 @@ export class AdaptorUser {
         }
 
         resp.body = resp.body.map(
-          (user) =>
+          (inUser) =>
             new InUser(
-              user.id,
-              user.name,
-              user.username,
-              user.email,
-              user.address,
-              user.phone,
-              user.website,
-              user.company
+              inUser.id,
+              inUser.name,
+              inUser.username,
+              inUser.email,
+              `${inUser.address.street}, ${inUser.address.suite} at ${inUser.address.city}`,
+              inUser.address.zipcode,
+              inUser.address.geo,
+              inUser.phone,
+              inUser.website,
+              inUser.company
             )
         );
 

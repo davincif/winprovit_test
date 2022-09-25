@@ -1,12 +1,9 @@
-import { CoreUser } from "./core/users.js";
-// const CoreUser = require('./core/users');
-// const CoreUser = require("./core/users.js");
-
-const coreUser = new CoreUser();
+import { Letter } from "./letter.js";
 
 let users = [];
 let showPostFromUser = -1;
 let errorMsg = "";
+let letter = new Letter();
 
 /**
  * Busca usuários com seus respectivos posts
@@ -14,7 +11,7 @@ let errorMsg = "";
  */
 async function getUsersWithPosts($event) {
   try {
-    users = await coreUser.getAllUsersAndPosts();
+    users = await letter.get();
     error = "";
   } catch (error) {
     error = "ERROR TRANLATION NOT IMPLEMENTED YET!";
@@ -85,7 +82,6 @@ function openAccordeon(id) {
  * @param {number} userId the id of the user of whom posts should be drawn
  */
 function drawPosts(user) {
-  console.log('user', user);
   const postSection = document.getElementById("postContentSection");
 
   // erase old posts

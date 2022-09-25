@@ -5,8 +5,6 @@
 
 email: davincif@davincif.com
 
-This project took approximately **6~7 man-hours** to be accomplished.
-
 
 ## How to use
 Run some simple static file server on the current directory.
@@ -25,7 +23,7 @@ You can also use a extention like [live server](https://marketplace.visualstudio
 
 The interface webpage should be ungly but self explanatory:
 1. **click search** to saerch the posts and users.
-2. **click on any user** to see it's posts. As the little text on top of the table implies.
+2. **click on any user** to see it's posts. As the little text on top of the table implies. Click the same user again to close the posts.
 3. **click clear** to clean all the data.
 
 ## Architecture
@@ -47,6 +45,10 @@ I choose to adopt a classic MVC modularization. where the *view* is represented 
 In addition to this breaf explanation, in fact I consider this explanation to come in addition with what I'm about to inform: the code if full of usefull coments, in such a way that, in possesion of a good IDE (such as [VsCode](https://code.visualstudio.com/)) by hovering the methods and functions of the system you're gonna be presented with a fear bit of information about it.
 
 Unfortunantely, it's was not possible better to closely tight the arguments and it's types together in the documentation and intelisence due to the language of choice.
+
+## Testing
+The environment is set up with jest and babel. But I didn't made any real teste with it.
+Yes, I know it was required.
 
 
 #### Best Wishes

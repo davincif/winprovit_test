@@ -4,6 +4,9 @@ import {
   APPLICATION_ERROR,
 } from "../models/transferObjects/errorTypes.js";
 
+/**
+ * Handler request error treatment in the system
+ */
 export class ErrorHandler {
   httpErros = {
     404: "Serviço fora de operação",

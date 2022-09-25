@@ -1,5 +1,8 @@
 import { UNIDENTIFIED_ERROR } from "./errorTypes.js";
 
+/**
+ * Object that represents an erros in some request in the system
+ */
 export class ErrorTransferObj {
   code;
   type = UNIDENTIFIED_ERROR;

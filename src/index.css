@@ -31,6 +31,12 @@ td {
   border: 1px solid black;
 }
 
+body .container .users .post-wrapper {
+  padding: 0.25rem 1rem;
+  margin: 0.25rem 0;
+  border: 1px solid black;
+}
+
 body .container .error-msg {
   color: rgb(180, 0, 0);
 }

@@ -5,9 +5,9 @@ import { CoreUser } from "./core/users.js";
 const coreUser = new CoreUser();
 
 let users = [];
+let showPostFromUser = -1;
 let errorMsg = "";
 
-// "Public" functions
 /**
  * Busca usuários com seus respectivos posts
  * @param {Event} $event
@@ -33,7 +33,6 @@ function cleanUsers($event) {
   drawUsers();
 }
 
-// "Internal" functions
 /**
  * Draw or erase all users in the screen, base on what is presente on "users"
  */
@@ -66,16 +65,64 @@ function drawUsers() {
       clonedCells[7].textContent = user.phone;
       clonedCells[8].textContent = user.website;
       clonedCells[9].textContent = user.company.name;
+      cloned.addEventListener("click", () => drawPosts(user));
       cloned.hidden = false;
       table.appendChild(cloned);
     }
   }
 }
 
+/**
+ * Opens the given accordeon
+ * @param {string} id The id of the Accordeon to be openned
+ */
 function openAccordeon(id) {
   document.getElementById(id).setAttribute("open", true);
 }
 
+/**
+ * Draw the posts of an specific user. If called on the same user twice, hide it
+ * @param {number} userId the id of the user of whom posts should be drawn
+ */
+function drawPosts(user) {
+  console.log('user', user);
+  const postSection = document.getElementById("postContentSection");
+
+  // erase old posts
+  const postBody = postSection.querySelectorAll("[postBod]");
+  postBody[0].hidden = true;
+  for (let count = postBody.length - 1; count >= 1; count--) {
+    postBody[count].remove();
+  }
+
+  // hide the posts
+  if (showPostFromUser == user.posts[0].userId) {
+    postSection.hidden = true;
+    showPostFromUser = -1;
+
+    return;
+  }
+
+  // setting user name
+  const userPostName = postSection.querySelectorAll("[userPostName]");
+  userPostName[0].textContent = `Posts de ${user.username}:`;
+
+  // build new posts
+  postSection.hidden = false;
+  showPostFromUser = user.posts[0].userId;
+  for (let post of user.posts) {
+    let newPost = postBody[0].cloneNode(true);
+    postBody[0].hidden = false;
+    let paragraphs = postBody[0].getElementsByTagName("p");
+    paragraphs[0].textContent = post.title;
+    paragraphs[1].textContent = post.body;
+    postSection.appendChild(newPost);
+  }
+}
+
+/**
+ * Make some initial preparation for this vire to work as expected
+ */
 function init() {
   document
     .getElementById("showMe")

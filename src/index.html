@@ -16,7 +16,8 @@
 
       <!-- <div id="usersContainer" hidden> -->
       <div id="usersContainer" class="users">
-        <details id="contentSection">
+        <details id="contentSection" open>
+          <p>clique em um usuário para ver seus posts abaixo</p>
           <summary>Usuários</summary>
           <table>
             <tr>
@@ -45,6 +46,14 @@
             </tr>
           </table>
         </details>
+
+        <div id="postContentSection" hidden>
+          <h4 userPostName>Posts de {{User}}:</h4>
+          <div postBod class="post-wrapper">
+            <p class="post-title">TITLE</p>
+            <p class="post-body">body content of the post</p>
+          </div>
+        </div>
 
         <div id="errorSection" class="error-msg">
           <p></p>

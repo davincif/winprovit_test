@@ -11,7 +11,10 @@ export class PortUser {
    * Get all the available users with the adaptors and transform in understanda
    * object for the system to process
    */
-  getAllUsers() {
-    this.adaptor.getAllUsers();
+   async getAllUsers() {
+    const req = await this.adaptor.getAllUsers();
+    console.log("req", req);
+    // let resp =
+    return req;
   }
 }

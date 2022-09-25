@@ -1,5 +1,5 @@
 /**
- * A user from the system as it comes from the backend
+ * A system's user as it comes from the backend
  */
 export class InUser {
   id = 0;

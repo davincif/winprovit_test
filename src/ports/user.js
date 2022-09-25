@@ -17,14 +17,6 @@ export class PortUser {
     // error cases should be treated by the caller
     const resp = await this.adaptor.getAllUsers();
 
-    if (
-      (resp.status != 200 && resp.status != 201) ||
-      !resp.body ||
-      !Array.isArray(resp.body)
-    ) {
-      return resp;
-    }
-
     resp.body = resp.body.map(
       (inUser) =>
         new OutUser(
@@ -52,15 +44,6 @@ export class PortUser {
   async getAllPosts() {
     // error cases should be treated by the caller
     const resp = await this.adaptor.getAllPosts();
-
-    if (
-      resp.status != 200 ||
-      resp.status != 201 ||
-      !resp.body ||
-      !Array.isArray(resp.body)
-    ) {
-      return resp;
-    }
 
     resp.body = resp.body.map(
       (post) => new OutPost(post.id, post.uderId, post.title, post.body)

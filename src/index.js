@@ -10,13 +10,14 @@ let letter = new Letter();
  * @param {Event} $event
  */
 async function getUsersWithPosts($event) {
+  let error = "";
   try {
     users = await letter.get();
-    error = "";
-  } catch (error) {
-    error = "ERROR TRANLATION NOT IMPLEMENTED YET!";
+  } catch (err) {
+    error = err.error.msg;
   }
 
+  drawError(error);
   drawUsers();
   openAccordeon("contentSection");
 }
@@ -27,7 +28,9 @@ async function getUsersWithPosts($event) {
  */
 function cleanUsers($event) {
   users = [];
+  errorMsg = "";
   drawUsers();
+  drawError();
 }
 
 /**
@@ -44,28 +47,49 @@ function drawUsers() {
     trs[count].remove();
   }
 
+  // is there something to be drawn?
+  if (users.length == 0) {
+    return;
+  }
+
+  let stdtr = trs[1];
+  stdtr.hidden = true;
+  for (let user of users) {
+    let cloned = stdtr.cloneNode(true);
+    let clonedCells = cloned.getElementsByTagName("td");
+    clonedCells[0].textContent = user.id;
+    clonedCells[1].textContent = user.name;
+    clonedCells[2].textContent = user.username;
+    clonedCells[3].textContent = user.email;
+    clonedCells[4].textContent = user.address;
+    clonedCells[5].textContent = user.zipcode;
+    clonedCells[6].textContent = `(${user.geo.lat}, ${user.geo.lng})`;
+    clonedCells[7].textContent = user.phone;
+    clonedCells[8].textContent = user.website;
+    clonedCells[9].textContent = user.company.name;
+    cloned.addEventListener("click", () => drawPosts(user));
+    cloned.hidden = false;
+    table.appendChild(cloned);
+  }
+}
+
+/**
+ * Draw the error msg at the screen, or remove it from there if no error is present
+ * @param {string} msg error msg to be drown on the screen
+ */
+function drawError(msg) {
+  // spearing process
+  if (errorMsg == msg) {
+    return;
+  }
+
+  errorMsg = msg;
+  const errorSection = document.getElementById("errorSection");
+  errorSection.getElementsByTagName("p")[0].textContent = errorMsg;
   if (errorMsg) {
-    // code
-  } else if (users.length > 0) {
-    let stdtr = trs[1];
-    stdtr.hidden = true;
-    for (let user of users) {
-      let cloned = stdtr.cloneNode(true);
-      let clonedCells = cloned.getElementsByTagName("td");
-      clonedCells[0].textContent = user.id;
-      clonedCells[1].textContent = user.name;
-      clonedCells[2].textContent = user.username;
-      clonedCells[3].textContent = user.email;
-      clonedCells[4].textContent = user.address;
-      clonedCells[5].textContent = user.zipcode;
-      clonedCells[6].textContent = `(${user.geo.lat}, ${user.geo.lng})`;
-      clonedCells[7].textContent = user.phone;
-      clonedCells[8].textContent = user.website;
-      clonedCells[9].textContent = user.company.name;
-      cloned.addEventListener("click", () => drawPosts(user));
-      cloned.hidden = false;
-      table.appendChild(cloned);
-    }
+    errorSection.hidden = false;
+  } else {
+    errorSection.hidden = true;
   }
 }
 

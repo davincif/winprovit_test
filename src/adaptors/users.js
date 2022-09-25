@@ -1,8 +1,16 @@
 import { InPost } from "../models/inObjects/inPosts.js";
 import { InUser } from "../models/inObjects/inUser.js";
+import { ErrorTransferObj } from "../models/transferObjects/errorTransferObj.js";
+import {
+  APPLICATION_ERROR,
+  HTTP_ERROR,
+} from "../models/transferObjects/errorTypes.js";
 import { HttpTransferObj } from "../models/transferObjects/httpTransferObj.js";
+import { ErrorHandler } from "./errorHandler.js";
 
 export class AdaptorUser {
+  errorHandler = new ErrorHandler();
+
   constructor() {}
 
   /**
@@ -12,32 +20,39 @@ export class AdaptorUser {
     return this.#makeRequest(
       "GET",
       "https://jsonplaceholder.typicode.com/users"
-    ).then((resp) => {
-      // error cases should be treated by the caller
-      if (
-        (resp.status != 200 && resp.status != 201) ||
-        !resp.body ||
-        !Array.isArray(resp.body)
-      ) {
+    )
+      .then((resp) => {
+        // does any data came fro the back?
+        if (!resp.body || !Array.isArray(resp.body)) {
+          throw resp;
+        }
+
+        resp.body = resp.body.map(
+          (user) =>
+            new InUser(
+              user.id,
+              user.name,
+              user.username,
+              user.email,
+              user.address,
+              user.phone,
+              user.website,
+              user.company
+            )
+        );
+
         return resp;
-      }
+      })
+      .catch((error) => {
+        if (error.status != 200 && error.status != 201) {
+          error.error = new ErrorTransferObj(error.status, HTTP_ERROR);
+        } else if (!error.body || !Array.isArray(error.body)) {
+          error.error = new ErrorTransferObj(700, APPLICATION_ERROR);
+        }
 
-      resp.body = resp.body.map(
-        (user) =>
-          new InUser(
-            user.id,
-            user.name,
-            user.username,
-            user.email,
-            user.address,
-            user.phone,
-            user.website,
-            user.company
-          )
-      );
-
-      return resp;
-    });
+        this.errorHandler.handle(error.error);
+        throw error;
+      });
   }
 
   /**
@@ -47,17 +62,29 @@ export class AdaptorUser {
     return this.#makeRequest(
       "GET",
       "https://jsonplaceholder.typicode.com/posts"
-    ).then((resp) => {
-      if (!resp.body || !Array.isArray(resp.body)) {
+    )
+      .then((resp) => {
+        // does any data came fro the back?
+        if (!resp.body || !Array.isArray(resp.body)) {
+          throw resp;
+        }
+
+        resp.body = resp.body.map(
+          (post) => new InPost(post.id, post.userId, post.title, post.body)
+        );
+
         return resp;
-      }
+      })
+      .catch((error) => {
+        if (error.status != 200 && error.status != 201) {
+          error.error = new ErrorTransferObj(error.status, HTTP_ERROR);
+        } else if (!error.body || !Array.isArray(error.body)) {
+          error.error = new ErrorTransferObj(700, APPLICATION_ERROR);
+        }
 
-      resp.body = resp.body.map(
-        (post) => new InPost(post.id, post.userId, post.title, post.body)
-      );
-
-      return resp;
-    });
+        this.errorHandler.handle(error.error);
+        throw error;
+      });
   }
 
   /**
